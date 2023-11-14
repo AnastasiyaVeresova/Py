@@ -2,33 +2,33 @@
 
 import random
 
-# print(sp:=[random.randint(1,10) for _ in range(10)])
-# print(sp1:=[random.randint(1,10) for _ in range(5)])
-# sp1 = set(sp1)
-# result = []
-# for i in sp:
-#     if i not in sp1:
-#         result.append(i)
-# print(result)
-# print(result2:=[i for i in sp if i not in set(sp1)])
+print(sp:=[random.randint(1,10) for _ in range(10)])
+print(sp1:=[random.randint(1,10) for _ in range(5)])
+sp1 = set(sp1)
+result = []
+for i in sp:
+    if i not in sp1:
+        result.append(i)
+print(result)
+print(result2:=[i for i in sp if i not in set(sp1)])
 
 
 ##-------------------------------------------------------
 
-def filter_list(array1, array2):
-    res_array = []
-    for i in array1:
-        if i not in array2:
-            res_array.append(i)
-    return res_array
+# def filter_list(array1, array2):
+#     res_array = []
+#     for i in array1:
+#         if i not in array2:
+#             res_array.append(i)
+#     return res_array
 
-def create_random_list(number):
-    return [random.randint(-10,10) for _ in range(number+1)]
+# def create_random_list(number):
+#     return [random.randint(-10,10) for _ in range(number+1)]
 
-number_1 = int(input("Введите количество элементов первого массива: "))
-int_array_1 = create_random_list(number_1)
-print(int_array_1)
-number_2 = int(input("Введите количество элементов второго массива: "))
-int_array_2 = create_random_list(number_2)
-print(int_array_2)
-print(filter_list(int_array_1, int_array_2))
+# number_1 = int(input("Введите количество элементов первого массива: "))
+# int_array_1 = create_random_list(number_1)
+# print(int_array_1)
+# number_2 = int(input("Введите количество элементов второго массива: "))
+# int_array_2 = create_random_list(number_2)
+# print(int_array_2)
+# print(filter_list(int_array_1, int_array_2))
