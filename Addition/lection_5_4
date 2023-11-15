@@ -1,0 +1,4 @@
+with open(file.txt, 'w') as data:  #(перезапишет все)
+	data.write('line 1\n')     #\n с новой строки
+	data.write('line 2\n')
+
