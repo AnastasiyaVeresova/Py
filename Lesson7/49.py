@@ -15,10 +15,11 @@ orbits = [(1, 3), (7, 2), (6, 6), (4, 3),(2.5, 10)]
 sq = [(item[0]*item[1]) if item[0]!=item[1] else 0 for item in orbits ]
 print(orbits[sq.index(max(sq))])
 
-
 sq = list(map(lambda x: x[0]*x[1] if x[0]!=x[1] else 0,orbits))
 print(orbits[sq.index(max(sq))])
 
-
 print(orbits.index(*filter(lambda item: item[0]*item[1]== max(list(map(lambda x:\
                     x[0]*x[1] if x[0]!=x[1] else 0,orbits))), orbits)))
+# (2.5, 10)
+# (2.5, 10)
+# 4
