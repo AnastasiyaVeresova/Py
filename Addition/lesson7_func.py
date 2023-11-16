@@ -41,3 +41,21 @@ print(square(9))
 __________________________________________________________________________
 calc_pw = lambda x,y: x**y if x < y else False
 print(calc_pw(4, 3))
+__________________________________________________________________________
+
+sp = [1,2,3,4,5,6,7]
+calc_pw = lambda x,y: x**y if x < y else False
+# print(calc_pw(4, 3))
+# print(*map(lambda x: x**2 , sp))
+# print(sp2 := list(map(lambda x: x**2 , sp)))
+calculator = {  "+": lambda x,y: x + y,
+                "-": lambda x,y: x - y,
+                "/": lambda x,y: x / y,
+                "*": lambda x,y: x * y
+             }
+
+s = input("Введите арифметическое выражение ")
+x,op,y = s.split()
+print(calculator[op] (int(x), int(y)))
+
+____________________________________________________________________filter
