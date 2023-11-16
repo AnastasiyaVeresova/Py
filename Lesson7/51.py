@@ -4,3 +4,15 @@
 # Для пустого набора объектов, функция должна возвращать True.
 # Аргумент characteristic - это функция, которая принимает объект и вычисляет его характеристику.
 # Ввод: Вывод: values = [0, 2, 10, 6] same
+
+values = [0, 2, 10, 6]
+def same_by (characteristic, objects):
+    sq = list(filter(characteristic,objects))
+    if objects == sq or len(sq) == 0:
+        return True
+    return False
+
+if same_by(lambda x: x % 2, values):
+    print('same')
+else:
+    print('different')
