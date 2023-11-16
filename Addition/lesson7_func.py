@@ -59,3 +59,11 @@ x,op,y = s.split()
 print(calculator[op] (int(x), int(y)))
 
 ____________________________________________________________________filter
+
+print(*filter(lambda x: x > 10 , sp))
+for item in enumerate(sp):
+    print(item)
+sp2 = ["Ваня", "Вася"]
+print(*zip(sp,sp2))
+
+
