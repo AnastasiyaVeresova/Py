@@ -12,3 +12,14 @@ def print_operation_table(operation, num_rows=6, num_columns=6):
         print(*[f"{x}" for x in i])
 
 print_operation_table(lambda x, y: x * y)
+
+-----------------------------------------для автотеста
+
+def print_operation_table(operation, num_rows, num_columns):
+    if num_rows >= 1 and num_columns >= 1:
+        res = [[operation(i, j) for i in range(1, num_columns + 1)] for j in range(1, num_rows + 1)]
+        for i in res:
+            print(*[f"{x}" for x in i])
+    else:
+        print('ОШИБКА! Размерности таблицы должны быть больше 2!')
+             
