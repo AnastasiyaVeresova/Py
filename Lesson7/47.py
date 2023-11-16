@@ -7,3 +7,7 @@
 # 7. Функции высшего порядка Задача №47.
 # Решение в группах Ввод: values = [1, 23, 42, ‘asdfg’] transformed_values = list(map(trasformation, values)) if values == transformed_values:    print(‘ok’) else:    print(‘fail’) Вывод: ok
 
+values = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29] 
+print(values)
+transormed_values = list(map(lambda x: x * 1, values))
+print(transormed_values)

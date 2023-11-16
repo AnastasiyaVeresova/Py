@@ -13,7 +13,7 @@ def print_operation_table(operation, num_rows=6, num_columns=6):
 
 print_operation_table(lambda x, y: x * y)
 
------------------------------------------для автотеста
+#-----------------------------------------для автотеста
 
 def print_operation_table(operation, num_rows, num_columns):
     if num_rows >= 1 and num_columns >= 1:
