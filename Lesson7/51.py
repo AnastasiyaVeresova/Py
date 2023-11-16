@@ -16,3 +16,18 @@ if same_by(lambda x: x % 2, values):
     print('same')
 else:
     print('different')
+
+
+-----------------------------------------------------
+
+values = [0, 2, 10, 6]
+def same_by (characteristic, objects):
+    sq = list(filter(characteristic,objects))
+    if  len(sq) == len(sq) % len(objects):
+        return True
+    return False
+
+if same_by(lambda x: x % 2, values):
+    print('same')
+else:
+    print('different')
