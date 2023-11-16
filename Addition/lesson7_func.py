@@ -37,3 +37,7 @@ square = calc_power(2)
 
 print(cube(4))
 print(square(9))
+
+__________________________________________________________________________
+calc_pw = lambda x,y: x**y if x < y else False
+print(calc_pw(4, 3))
