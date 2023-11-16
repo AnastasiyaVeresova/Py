@@ -11,3 +11,14 @@
 # Пример ввода и вывода данных представлены на следующем слайде 20 минутСеминар 7. Функции высшего порядка Задача №49.
 # Решение в группах Ввод: orbits = [(1, 3), (2.5, 10), (7, 2), (6, 6), (4, 3)] print(*find_farthest_orbit(orbits)) Вывод: 2.5 10
 
+orbits = [(1, 3), (7, 2), (6, 6), (4, 3),(2.5, 10)]
+sq = [(item[0]*item[1]) if item[0]!=item[1] else 0 for item in orbits ]
+print(orbits[sq.index(max(sq))])
+
+
+sq = list(map(lambda x: x[0]*x[1] if x[0]!=x[1] else 0,orbits))
+print(orbits[sq.index(max(sq))])
+
+
+print(orbits.index(*filter(lambda item: item[0]*item[1]== max(list(map(lambda x:\
+                    x[0]*x[1] if x[0]!=x[1] else 0,orbits))), orbits)))
