@@ -13,8 +13,10 @@ def rhythm(stroka):
 
 # stroka = str(input("Введите стихотворение: "))
 stroka = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
-
-if rhythm(stroka):
-    print('Парам пам-пам')
+if not ' ' in stroka:
+    print('В фразе должно быть больше одного слова')
 else:
-    print('Пам парам')
+    if rhythm(stroka):
+        print('Парам пам-пам')
+    else:
+        print('Пам парам')
