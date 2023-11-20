@@ -1,10 +1,20 @@
 # Создать телефонный справочник с возможностью импорта и экспорта данных в формате .txt. Фамилия, имя, отчество, номер телефона - данные, которые должны находиться в файле. 1. Программа должна выводить данные 2. Программа должна сохранять данные в текстовом файле 3. Пользователь может ввести одну из характеристик для поиска определенной записи(Например имя или фамилию человека) 4. Использование функций. Ваша программа не должна быть линейной
 
-# import sqllite3 as sl
+# import sqlite3 as sl
 
-# conn =
+# conn = sl.connect("test.db")
 
- 
+# cursor = conn.cursor()
+
+# cursor.execute("""CREATE TABLE IF NOT EXISTS users
+#                (ID integer primary key,
+#                name text)
+#                ;""")
+# cursor.execute("INSERT INTO users Values (1, 'Ваня', 'Иванов');")
+# cursor.execute("SELECT * FROM users;")
+# print(cursor.fetchall())
+
+#--------------------------------------------------------------- 
 
 # def new():
 
@@ -137,13 +147,6 @@ def find_by_attribute(file_name:str,option: bool):
         else:
             id = input("Введите id нужного пользователя: ")
         return data[int(id)-1]
-    
-        
-
-        
-    
-        
-        
 
 
 def add_new(file_name: str):
@@ -188,6 +191,7 @@ def main():
 
 if __name__ == '__main__':
     main()
+    
     # print('123')
     # print(__name__)
 # else:
@@ -242,7 +246,7 @@ def outputDataFile(filename):
         print()
     print('╘════════════════╧════════════════╧════════════════╧════════════════╧════════════════╛')
 
-'''# поиск записи в справочнике
+# поиск записи в справочнике
 def findRecord(filename,record):
     temp = 0
     print()
@@ -282,4 +286,4 @@ def main(filename):
         else: break
 
 fileName = 'telephonebook1.txt'
-main(fileName)'''
+main(fileName)

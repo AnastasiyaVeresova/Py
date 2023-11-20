@@ -1,11 +1,12 @@
 from random import *
+
 import json
 
 films = []
 
 def save():
 
-    with open("Addition/films.json", "w", encoding = "utf-8") as fh:
+    with open("films.json", "w", encoding = "utf-8") as fh:
 
         fh.write(json.dumps(films, ensure_ascii = False))
 
@@ -114,3 +115,5 @@ while True:
     else:
 
         print("Неопознанная команда. Просьба изучить мануал через /help")
+
+ 
