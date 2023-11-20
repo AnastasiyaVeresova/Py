@@ -33,7 +33,6 @@
 
 # reverse_num(4, [1, 3, 4, 5])
 
-
 def rec(n):
     if n == 0:
         return ''

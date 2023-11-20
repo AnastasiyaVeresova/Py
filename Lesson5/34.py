@@ -12,7 +12,7 @@ def rhythm(stroka):
     return all([f(i) == sum_word for i in stroka])
 
 # stroka = str(input("Введите стихотворение: "))
-stroka = 'пара-ра-рам рам-пам-папам па-ра-па-дам'
+stroka = 'пам'
 if not ' ' in stroka:
     print('В фразе должно быть больше одного слова')
 else:

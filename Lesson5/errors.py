@@ -17,35 +17,35 @@ os.system("cls")
 #                     print(value := operation(i, j), end=' ')
 #             print()
 
-def print_operation_table(operation, num_columns, num_rows):
-    if num_rows < 2 and num_columns < 2:
-        print('ОШИБКА! Размерности таблицы должны быть больше 2!')
-    else:
-        i = j = 0
-        j += 1
-        if operation(i, j) == i + j:
-            for i in range(0, num_columns + 1):
-                for j in range(0, num_rows + 1):
-                    print(value := operation(i, j), end=' ')
-                print()
-        elif operation(i, j) == i - j:
-            for i in range(0, num_columns + 1):
-                for j in range(0, num_rows + 1):
-                    print(value := operation(i, j), end=' ')
-                print()
-        elif operation(i, j) == i * j:
-            for i in range(1, num_columns + 1):
-                for j in range(1, num_rows + 1):
-                    print(value := operation(i, j), end=' ')
-                print()
-        elif operation(i, j) == i / j:
-            if j != 0:
-                for i in range(0, num_columns + 1):
-                    for j in range(1, num_rows + 1):
-                        print(value := operation(j, i), end=' ')
-                    print()
-            else:
-                print("division by zero")
+# def print_operation_table(operation, num_columns, num_rows):
+#     if num_rows < 2 and num_columns < 2:
+#         print('ОШИБКА! Размерности таблицы должны быть больше 2!')
+#     else:
+#         i = j = 0
+#         j += 1
+#         if operation(i, j) == i + j:
+#             for i in range(0, num_columns + 1):
+#                 for j in range(0, num_rows + 1):
+#                     print(value := operation(i, j), end=' ')
+#                 print()
+#         elif operation(i, j) == i - j:
+#             for i in range(0, num_columns + 1):
+#                 for j in range(0, num_rows + 1):
+#                     print(value := operation(i, j), end=' ')
+#                 print()
+#         elif operation(i, j) == i * j:
+#             for i in range(1, num_columns + 1):
+#                 for j in range(1, num_rows + 1):
+#                     print(value := operation(i, j), end=' ')
+#                 print()
+#         elif operation(i, j) == i / j:
+#             if j != 0:
+#                 for i in range(0, num_columns + 1):
+#                     for j in range(1, num_rows + 1):
+#                         print(value := operation(j, i), end=' ')
+#                     print()
+#             else:
+#                 print("division by zero")
 
 # def print_operation_table(operation, num_columns, num_rows):
 #     if num_rows < 2 and num_columns < 2:
@@ -55,6 +55,30 @@ def print_operation_table(operation, num_columns, num_rows):
 #         for i in value:
 #             print(*[f"{x}" for x in i])
 #         print()
+
+# def print_operation_table(operation, num_rows, num_columns):
+#     if num_rows < 2:
+#         print('ОШИБКА! Размерности таблицы должны быть больше 2!')
+#     else:
+#         for i in range(1,num_rows+1):
+#             if i == 1:
+#                 sq = [i for i in range(1,num_rows+1)]
+#             else:
+#                 sq = [operation(i,j) if j > 1 else i for j in range(1, num_columns + 1)]
+#             print(*sq)
+
+
+def print_operation_table(operation, num_rows, num_columns):
+    if num_rows < 2 or num_columns < 2:
+        print('ОШИБКА! Размерности таблицы должны быть больше 2!')
+    else:
+        header = ' '.join([str(i) for i in range(1, num_columns + 1)])
+        print(header)
+        for i in range(2, num_rows + 1):
+            row = [str(i)] + [str(operation(i, j)) for j in range(2, num_columns + 1)]
+            print(' '.join(row))
+
+
 
 print_operation_table(lambda x, y: x + y, 4, 4)
 print()
