@@ -3,3 +3,12 @@
 # import sqllite3 as sl
 
 # conn =
+def new():
+    name = input("Введите имя абонента ")
+    phone = list(input("Введите телефон абонента через запятую ")).split(',')
+    email = input("Введите электронный адрес ")
+    if "@" in email:
+        phone_book[name] = {'phones': phone, 'email': email}
+    else:
+        phone_book[name] = {'phones': phone}
+
