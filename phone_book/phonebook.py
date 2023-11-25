@@ -23,7 +23,7 @@ def remove(file_name:str):
     file_name = 'phone_book/phonebook.txt'
     flag_exit = False
     while not flag_exit:
-        for_remove = input('Выберите:\n1 - для удаления определенного контакта по порядковому номеру,\n2 - для полного очищения телефонного справочника,\nx - для выхода: ')
+        for_remove = input('Выберите:\n1 - для удаления определенного контакта по порядковому номеру\n2 - для полного очищения телефонного справочника\nx - для выхода: ')
         print()
         if for_remove == '1':
             with open(file_name, 'r', encoding='utf-8') as main:
@@ -67,10 +67,13 @@ def show_all(file_name:str):
         print('Список ваших контактов: ')
         with open(file_name, 'r',encoding='utf-8') as f:
             data = f.readlines()
+            op = f.readline()
             i = 0
             for lines in data:
-                i += 1
-                print(str(i) + '. ' + lines.rstrip()) 
+                if len(lines) > 1:
+                    i += 1              
+                    print(str(i) + '. ' + lines.rstrip()) 
+
             print()
             # file_name.close()
 
@@ -83,17 +86,18 @@ def add_new(file_name):
             data = f.read()
             if len(data) > 0:
                 f.write('\n')
+
             last_name = input('Введите фамилию абонента: ')
             first_name = input('Введите имя абонента: ')
             patronymic = input('Введите отчество абонента: ')
-            phone = input('Введите номера телефонов абонента, если их несколько через запятую: ').split(',')
+            phone = input('Введите номера телефонов абонента, если их несколько через запятую: ')#.split(',')
             email = input('Введите e-mail (пропустить шаг - Enter): ')
             if "@" in email:
                 temp = (f'{last_name} {first_name} {patronymic}, {phone}, {email}').rstrip()
             else:
                 temp = (f'{last_name} {first_name} {patronymic}, {phone}').rstrip()            
 
-            f.write(temp.rstrip())
+            f.write(temp)
 
             f.close()
             print()
@@ -143,7 +147,7 @@ def add_new(file_name):
 
 def modify(file_name:str):
     file_name = 'phone_book/phonebook.txt'
-    change_contact = input('Выберите:\n1 - для исправления данных определенного контакта по порядковому номеру,\n2 - для замены всех вхождений слова,\nx - для выхода: ')
+    change_contact = input('Выберите:\n1 - для исправления данных определенного контакта по порядковому номеру\n2 - для замены всех вхождений слова\nx - для выхода: ')
     print()
     if change_contact == '1':
             with open(file_name, 'r', encoding='utf-8') as main:
@@ -155,6 +159,7 @@ def modify(file_name:str):
                     copy.close()
                     main.close()
                     number_contact = int(input('Введите № контакта, подлежащего изменениям: '))
+                    print()
                     try:
                         with open(file_name, 'r', encoding='utf-8') as source:
                             content = source.read()
@@ -198,6 +203,9 @@ def modify(file_name:str):
                     print()
         except:
             print("Ошибка")
+    elif change_contact == 'x':
+        flag_exit = True
+
       
 #========================================================Функция для поиска в базе
 
@@ -242,7 +250,9 @@ def main():
         elif answer == '5':
             print(find_by_name(file_name))
         elif answer == 'x':
+            print('Хороших контактов вам, да побольше!')
             flag_exit = True
+
 
 if __name__ == '__main__':
     main()
