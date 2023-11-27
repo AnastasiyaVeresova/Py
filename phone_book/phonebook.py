@@ -67,7 +67,7 @@ def show_all(file_name:str):
         print('Список ваших контактов: ')
         with open(file_name, 'r',encoding='utf-8') as f:
             data = f.readlines()
-            data = f.readline()
+            op = f.readline()
             i = 0
             for lines in data:
                 if len(lines) > 1:
@@ -205,41 +205,46 @@ def modify(file_name):
                     print()
         except:
             print("Ошибка")
-    # if change_contact == '3':
-    #         with open(file_name, 'r', encoding='utf-8') as main:
-    #             with open('phone_book/backup_file.txt', 'w', encoding='utf-8') as copy:
-    #                 for i, line in enumerate(main, 1):
-    #                     copy.write('{}: {}'.format(i, line))
-    #                     print(f'{i}.', line.rstrip())
-    #                 print()
-    #                 copy.close()
-    #                 main.close()
-    #                 number_contact = int(input('Введите № контакта, подлежащего изменениям: '))
-    #                 print()
-    #                 try:
-    #                     with open(file_name, 'r', encoding='utf-8') as source:
-    #                         content = source.read()
-    #                         lines = content.splitlines()
-    #                         lines = lines[number_contact - 1]
-    #                         source.close()
-    #                     print(f'Выбранный для внесения изменений контакт:\n{lines}')
-    #                     print()
-    #                     answer_add = input('Какой параметр добавим:\n1 - телефон\n2 - e-mail\n3 - прочее\nВвод: ')
-    #                     if answer_add == '3':
-    #                         dop = input('Введите данные для добавления: ')
-    #                         with open(file_name, 'r', encoding='utf-8') as f:
-    #                             data = f.readlines()
-    #                             f.write(data)
-    #                             with open(file_name, 'w', encoding='utf-8') as change_one_contact:
-    #                                 lines = change_one_contact.write(lines + ', ' + dop)
+    if change_contact == '3':
+            with open(file_name, 'r', encoding='utf-8') as main:
+                with open('phone_book/backup_file.txt', 'w', encoding='utf-8') as copy:
+                    for i, line in enumerate(main, 1):
+                        copy.write('{}: {}'.format(i, line))
+                        print(f'{i}.', line.rstrip())
+                    print()
+                    copy.close()
+                    main.close()
+                    number_contact = int(input('Введите № контакта, подлежащего изменениям: '))
+                    print()
+                    try:
+                        with open(file_name, 'r', encoding='utf-8') as source:
+                            content = source.read()
+                            lines = content.splitlines()
+                            lines = lines[number_contact - 1]
+                            source.close()
+                        print(f'Выбранный для внесения изменений контакт:\n{lines}')
+                        print()
+                        answer_add = input('Какой параметр добавим:\n1 - телефон\n2 - e-mail\n3 - прочее\nВвод: ')
+                        if answer_add == '3':
+                            dop = input('Введите данные для добавления: ')
+                            with open(file_name, 'r', encoding='utf-8') as f:
+                                data = f.readlines()
+                                # f.write(data)
+                                with open(file_name, 'w', encoding='utf-8') as change_one_contact:
+                                    change_one_contact.write('{}'.format(line))
+                                    for line in data:
+
+                                        change_one_contact.write(line.replace(lines, lines + ', ' + dop))
+                                    print(line.rstrip())
+
                                 
-    #                                 change_one_contact.close()
-    #                                 f.close()
-    #                                 print()
-    #                                 print("Контакт успешно отредактирован")
-    #                                 print()
-    #                 except:
-    #                     print("Ошибка")
+                                    change_one_contact.close()
+                                    f.close()
+                                    print()
+                                    print("Контакт успешно отредактирован")
+                                    print()
+                    except:
+                        print("Ошибка")
     
     elif change_contact == 'x':
         flag_exit = True
