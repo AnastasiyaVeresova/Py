@@ -131,6 +131,61 @@ df.loc[df['median_income'] > 6, 'income_group'] = 'Богатенькие'
 df.loc[df['median_income'] <= 6, 'income_group'] = 'Средний класс'
 # -----------------------------------------------------------------
 
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+file = 'california_housing_train.csv'
+
+df = pd.read_csv(file)
+# 1. Изобразите отношение households к population с
+# помощью точечного графика
+sns.scatterplot(data=df, x = 'population', y = 'households')
+# 2. Визуализировать longitude по отношения к
+# median_house_value, используя линейный график
+sns.relplot(x='longitude', y='median_house_value', kind='line', data = df)
+# 3. Представить гистограмму по housing_median_age
+sns.histplot(data = df, x = 'housing_median_age')
+# 4. Изобразить гистограмму по median_house_value с
+# оттенком housing_median_age
+df.loc[df['housing_median_age'] > 10, 'income_group'] = 'old'
+df.loc[df['housing_median_age'] < 10, 'income_group'] = 'new'
+sns.displot(data = df, x = 'median_house_value', hue='income_group')
+
+plt.show()
+
+
+#----------------------------------------------
+sns.boxplot(data=penguins, x='species', y='bill_length_mm')
+
+
+#----------------------------------------------
+
+sns.displot(data=penguins, x="flipper_length_mm", hue="species", col="species")
+
+#----------------------------------------------
+
+penguins.groupby(['species', 'sex']).mean()
+
+#----------------------------------------------
+
+penguins.loc[penguins.bill_length_mm >= 42, 'bill_group'] = 'High'
+penguins.loc[(penguins.bill_length_mm >35) & (penguins.bill_length_mm < 42), 'bill_group'] = 'Middle'
+penguins.loc[penguins.bill_length_mm <= 35, 'bill_group'] = 'Low'
+penguins.head()
+
+#----------------------------------------------
+sns.histplot(data=penguins, x='flipper_length_mm', hue='bill_group', multiple="stack")
+
+#----------------------------------------------
+
+sns.PairGrid(penguins, hue='species').map(sns.scatterplot).add_legend()
+
+#----------------------------------------------
+
+
+
+#----------------------------------------------
+
 
 # 1: Прыгучий Симулятор Андреевич, ['89763245374']
 # 2: Пузиков Григорий Валерьевич, ['8456734']

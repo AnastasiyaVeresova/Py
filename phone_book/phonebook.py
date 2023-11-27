@@ -1,5 +1,5 @@
 import os
-
+import re
 #========================================================Функция для подсчета строк в файле
 
 def count_nonempty_lines(file_name):
@@ -90,12 +90,12 @@ def add_new(file_name):
             last_name = input('Введите фамилию абонента: ')
             first_name = input('Введите имя абонента: ')
             patronymic = input('Введите отчество абонента: ')
-            phone = input('Введите номера телефонов абонента, если их несколько через запятую: ')#.split(',')
+            phone = input('Введите номер телефона абонента, если их несколько через запятую: ')#.split(',')
             email = input('Введите e-mail (пропустить шаг - Enter): ')
             if "@" in email:
-                temp = (f'{last_name} {first_name} {patronymic}, {phone}, {email}').rstrip()
+                temp = (f'{last_name} {first_name} {patronymic}, тел.: {phone}, e-mail: {email}').rstrip()
             else:
-                temp = (f'{last_name} {first_name} {patronymic}, {phone}').rstrip()            
+                temp = (f'{last_name} {first_name} {patronymic},  тел.: {phone}').rstrip()            
 
             f.write(temp)
 
@@ -225,13 +225,31 @@ def modify(file_name):
                         print(f'Выбранный для внесения изменений контакт:\n{lines}')
                         print()
                         answer_add = input('Какой параметр добавим:\n1 - телефон\n2 - e-mail\n3 - прочее\nВвод: ')
+                        # if answer_add == '1':
+                        #     phone = input('Введите номер телефона абонента, если их несколько через запятую: ')#.split(',')
+                        #     with open(file_name, 'r', encoding='utf-8') as f:
+                        #         data = f.readlines()
+                        #         # f.write(data)
+                        #         with open(file_name, 'r', encoding='utf-8') as contact_phone_add:
+                        #             contact_phone_add.write('{}'.format(line))
+                        #             lines = lines[0].split
+                        #             text = lines[0]
+                        #             print(''.join(text[text.find('тел.:') + 6:] + ', ' + phone))
+
+
+                                
+                        #             contact_phone_add.close()
+                        #             f.close()
+                        #             print()
+                        #             print("Контакт успешно отредактирован")
+                        #             print()
                         if answer_add == '3':
                             dop = input('Введите данные для добавления: ')
                             with open(file_name, 'r', encoding='utf-8') as f:
                                 data = f.readlines()
                                 # f.write(data)
                                 with open(file_name, 'w', encoding='utf-8') as change_one_contact:
-                                    change_one_contact.write('{}'.format(line))
+                                    # change_one_contact.write('{}'.format(line))
                                     for line in data:
                                         change_one_contact.write(line.replace(lines, lines + ', ' + dop))
                                     print(line.rstrip())
