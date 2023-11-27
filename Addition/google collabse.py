@@ -116,6 +116,22 @@ df.loc[     (df['median_house_value'] == df['median_house_value'].min()),   ['po
 
 # -----------------------------------------------------------------
 
+sns.scatterplot(data=df, x="households", y="population", hue = 'total_bedrooms',  size="total_rooms");
+
+# -----------------------------------------------------------------
+sns.relplot(x="longitude", y="median_house_value", kind="line", data=df);
+# -----------------------------------------------------------------
+df.loc[df['housing_median_age'] <= 20, 'age_group'] = 'Новые'
+df.loc[(df['housing_median_age'] > 20) & (df['housing_median_age'] <= 50), 'age_group'] = 'Ср. возраст'
+df.loc[df['housing_median_age'] > 50, 'age_group'] = 'Старые'
+
+# -----------------------------------------------------------------
+
+df.loc[df['median_income'] > 6, 'income_group'] = 'Богатенькие'
+df.loc[df['median_income'] <= 6, 'income_group'] = 'Средний класс'
+# -----------------------------------------------------------------
+
+
 # 1: Прыгучий Симулятор Андреевич, ['89763245374']
 # 2: Пузиков Григорий Валерьевич, ['8456734']
 # 3: Колесов Радар Петрович ['89112537658', ' 89213457859'], radar@yandex.ru
