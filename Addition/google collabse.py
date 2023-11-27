@@ -121,7 +121,9 @@ sns.scatterplot(data=df, x="households", y="population", hue = 'total_bedrooms',
 # -----------------------------------------------------------------
 sns.relplot(x="longitude", y="median_house_value", kind="line", data=df);
 # -----------------------------------------------------------------
-
+df.loc[df['housing_median_age'] <= 20, 'age_group'] = 'Новые'
+df.loc[(df['housing_median_age'] > 20) & (df['housing_median_age'] <= 50), 'age_group'] = 'Ср. возраст'
+df.loc[df['housing_median_age'] > 50, 'age_group'] = 'Старые'
 
 
 
