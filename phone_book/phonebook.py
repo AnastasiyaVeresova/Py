@@ -233,10 +233,8 @@ def modify(file_name):
                                 with open(file_name, 'w', encoding='utf-8') as change_one_contact:
                                     change_one_contact.write('{}'.format(line))
                                     for line in data:
-
                                         change_one_contact.write(line.replace(lines, lines + ', ' + dop))
                                     print(line.rstrip())
-
                                 
                                     change_one_contact.close()
                                     f.close()
