@@ -125,8 +125,10 @@ df.loc[df['housing_median_age'] <= 20, 'age_group'] = 'Новые'
 df.loc[(df['housing_median_age'] > 20) & (df['housing_median_age'] <= 50), 'age_group'] = 'Ср. возраст'
 df.loc[df['housing_median_age'] > 50, 'age_group'] = 'Старые'
 
+# -----------------------------------------------------------------
 
-
+df.loc[df['median_income'] > 6, 'income_group'] = 'Богатенькие'
+df.loc[df['median_income'] <= 6, 'income_group'] = 'Средний класс'
 # -----------------------------------------------------------------
 
 
