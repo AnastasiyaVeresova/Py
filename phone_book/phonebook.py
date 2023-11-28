@@ -1,6 +1,8 @@
 import os
 import re
-#========================================================Функция для подсчета строк в файле
+
+
+# ========================================================Функция для подсчета строк в файле
 
 def count_nonempty_lines(file_name):
     if os.path.exists(file_name):
@@ -8,33 +10,25 @@ def count_nonempty_lines(file_name):
             return len([line for line in f if line.rstrip()])
     else:
         return 0
-##============================================для подсчета
-    # with open('phone_book/phonebook.txt', 'r', encoding='utf-8') as source:
-    #     count = 0
-    #     s = source.readline()
-    #     while s != '':
-    #         s=source.readline()
-    #         count += 1
-    # print(count)
-    # source.close()
-#========================================================Функция для удаления   
 
-def remove(file_name:str):
+
+def remove(file_name: str):
     file_name = 'phone_book/phonebook.txt'
     flag_exit = False
     while not flag_exit:
-        for_remove = input('Выберите:\n1 - для удаления определенного контакта по порядковому номеру\n2 - для полного очищения телефонного справочника\nx - для выхода: ')
+        for_remove = input(
+            'Выберите:\n1 - для удаления определенного контакта по порядковому номеру\n2 - для полного очищения телефонного справочника\nx - для выхода: ')
         print()
         if for_remove == '1':
             with open(file_name, 'r', encoding='utf-8') as main:
-                with open('phone_book/backup_file.txt', 'w', encoding='utf-8') as copy:
+                with open('phone_book/backup_file.txt', 'w',
+                          encoding='utf-8') as copy:
                     for i, line in enumerate(main, 1):
                         copy.write('{}: {}'.format(i, line))
                         print(f'{i}.', line.rstrip())
                     print()
-                    copy.close()
-                    main.close()
-                    position_delete = int(input('Введите № позиции для удаления: '))
+                    position_delete = int(
+                        input('Введите № позиции для удаления: '))
                     try:
                         with open(file_name, 'r', encoding='utf-8') as source:
                             content = source.read()
@@ -43,264 +37,190 @@ def remove(file_name:str):
                             new_content = '\n'.join(lines)
                         with open(file_name, 'w', encoding='utf-8') as source:
                             source.write(new_content)
-                            source.close()
                         print("Контакт удален")
                         print()
-                    except:
-                        print("Ошибка")
+                    except Exception as err:
+                        print("Ошибка:", err)
         elif for_remove == '2':
             try:
                 open(file_name, 'w').close()
                 print("Телефонная книга успешно очищена")
                 print()
-            except:
-                print("Ошибка")
+            except Exception as err:
+                print("Ошибка:", err)
         elif for_remove == 'x':
             flag_exit = True
 
-#========================================================Функция для показа всех записей в справочнике
-def show_all(file_name:str):
+
+# ========================================================Функция для показа всех записей в справочнике
+def show_all(file_name: str):
     if count_nonempty_lines(file_name) == 0:
         print('Телефонная книга пуста > выберите 2 для добавления контакта')
         print()
     else:
         print('Список ваших контактов: ')
-        with open(file_name, 'r',encoding='utf-8') as f:
+        with open(file_name, 'r', encoding='utf-8') as f:
             data = f.readlines()
-            op = f.readline()
             i = 0
             for lines in data:
                 if len(lines) > 1:
-                    i += 1              
-                    print(str(i) + '. ' + lines.rstrip()) 
-
+                    i += 1
+                    print(str(i) + '. ' + lines.rstrip())
             print()
-            # file_name.close()
 
-#========================================================Функция для добавления нового контакта
+# ========================================================Функция для добавления нового контакта
 
 def add_new(file_name):
     try:
-        with open(file_name, 'a+', encoding='utf-8') as f:
-            f.seek(0)
-            data = f.read()
-            if len(data) > 0:
-                f.write('\n')
+        with open(file_name, 'a', encoding='utf-8') as f:
 
             last_name = input('Введите фамилию абонента: ')
             first_name = input('Введите имя абонента: ')
             patronymic = input('Введите отчество абонента: ')
-            phone = input('Введите номер телефона абонента, если их несколько через запятую: ')#.split(',')
+            phone = input(
+                'Введите номер телефона абонента, если их несколько через запятую: ')  # .split(',')
             email = input('Введите e-mail (пропустить шаг - Enter): ')
             if "@" in email:
-                temp = (f'{last_name} {first_name} {patronymic}, тел.: {phone}, e-mail: {email}').rstrip()
+                temp = (
+                    f'{last_name} {first_name} {patronymic}, тел.: {phone}, e-mail: {email}\n')
             else:
-                temp = (f'{last_name} {first_name} {patronymic},  тел.: {phone}').rstrip()            
+                temp = (
+                    f'{last_name} {first_name} {patronymic},  тел.: {phone}\n')
 
             f.write(temp)
 
-            f.close()
             print()
             print("Абонент успешно добавлен")
             print()
-    except:
-        print("Ошибка")
-                    
+    except Exception as err:
+        print("Ошибка:", err)
 
-    # contact = []
-    # contact.append(int(input('Введите порядковый номер абонента: ')))
-    # contact.append(input('Введите фамилию абонента: '))
-    # contact.append(input('Введите имя абонента: '))
-    # contact.append(input('Введите отчество абонента: '))
-    # contact.append(input('Введите номера телефонов абонента, если их несколько через запятую: ').split(','))
-    # contact.append(input('Введите e-mail (пропустить шаг - Enter): '))
-    # return contact
-    # if "@" in email:
-    #     phone_book[last_name] = {'Фамилия':last_name, 'Имя':first_name, 'Отчество':patronymic, 'тел':phone, 'email': email}
-    #     with open(file_name, 'a', encoding='utf-8') as fd:
-    #         fd.write(phone_book[last_name])
-    # else:
-    #     phone_book[last_name] = {'Фамилия':last_name, 'Имя':first_name, 'Отчество':patronymic, 'тел':phone}
-    #     with open(file_name, 'a', encoding='utf-8') as fd:
-    #         fd.write(phone_book[last_name])
-# Колесов, Радар, Петрович, ['87213562314', ' 89435321365'], radar@mail.ru
-# Прыгучий, Симулятор, Андреевия, ['89765253464']    
-
-
-#========================================================Функция для изменения данных
-
-# ХОЧУ ДОБАВИТЬ - ЕСЛИ СЛОВО ВВЕДЕНО С ОШИБКОЙ
-
-# def read_file():
-#     file_name = 'phone_book/phonebook.txt'
-#     with open(file_name, 'r', encoding='utf-8') as f:
-#         content = f.read()
-#     return content
-# def write_file(content):
-#     file_name = 'phone_book/phonebook.txt'
-#     with open(file_name, 'w', encoding='utf-8') as f:
-#         new_content = input('Введите на что заменить: ')
-#     f.write(new_content)
-
-# content = read_file()
+# ========================================================Функция для изменения данных
 
 
 def modify(file_name):
     file_name = 'phone_book/phonebook.txt'
-    change_contact = input('Выберите:\n1 - для исправления данных определенного контакта по порядковому номеру\n2 - для замены по всему справочнику\n3 - добавить данные\nx - для выхода: ')
+    change_contact = input(
+        'Выберите:\n1 - для исправления данных определенного контакта по порядковому номеру\n2 - для замены по всему справочнику\n3 - добавить данные\nx - для выхода: ')
     print()
     flag_exit = False
     if change_contact == '1':
-            with open(file_name, 'r', encoding='utf-8') as main:
-                with open('phone_book/backup_file.txt', 'w', encoding='utf-8') as copy:
-                    for i, line in enumerate(main, 1):
-                        copy.write('{}: {}'.format(i, line))
-                        print(f'{i}.', line.rstrip())
+        with open(file_name, 'r', encoding='utf-8') as main:
+            with open('phone_book/backup_file.txt', 'w',
+                      encoding='utf-8') as copy:
+                for i, line in enumerate(main, 1):
+                    copy.write('{}: {}'.format(i, line))
+                    print(f'{i}.', line.rstrip())
+                print()
+                number_contact = int(
+                    input('Введите № контакта, подлежащего изменениям: '))
+                print()
+                try:
+                    with open(file_name, 'r', encoding='utf-8') as source:
+                        content = source.read()
+                        lines = content.splitlines()
+                        lines = lines[number_contact - 1]
+                        source.close()
+                    print(
+                        f'Выбранный для внесения изменений контакт:\n{lines}')
                     print()
-                    copy.close()
-                    main.close()
-                    number_contact = int(input('Введите № контакта, подлежащего изменениям: '))
-                    print()
-                    try:
-                        with open(file_name, 'r', encoding='utf-8') as source:
-                            content = source.read()
-                            lines = content.splitlines()
-                            lines = lines[number_contact - 1]
-                            source.close()
-                        print(f'Выбранный для внесения изменений контакт:\n{lines}')
-                        print()
-                        was = input('Какое слово желаете изменить? Введите, пожалуйста: ')
-                        is_new = input('Введите на что нужно заменить: ')
-                        with open(file_name, 'r', encoding='utf-8') as f:
-                            data = f.readlines()
-                            with open(file_name, 'w', encoding='utf-8') as copy_one_contact:
-                                for line in data:
-                                    copy_one_contact.write(line.replace(was, is_new))
-                               
-                                copy_one_contact.close()
-                                f.close()
-                                print()
-                                print("Контакт успешно отредактирован")
-                                print()
-                    except:
-                        print("Ошибка")
+                    was = input(
+                        'Какое слово желаете изменить? Введите, пожалуйста: ')
+                    is_new = input('Введите на что нужно заменить: ')
+                    with open(file_name, 'r', encoding='utf-8') as f:
+                        data = f.readlines()
+                        with open(file_name, 'w',
+                                  encoding='utf-8') as copy_one_contact:
+                            for line in data:
+                                copy_one_contact.write(
+                                    line.replace(was, is_new))
+
+                            copy_one_contact.close()
+                            print()
+                            print("Контакт успешно отредактирован")
+                            print()
+                except Exception as err:
+                    print("Ошибка:", err)
     elif change_contact == '2':
         try:
             with open(file_name, 'r', encoding='utf-8') as source:
                 content = source.read()
                 lines = content.splitlines()
-                source.close()
 
             was = input('Какое слово желаете изменить? Введите, пожалуйста: ')
             is_new = input('Введите на что нужно заменить: ')
             with open(file_name, 'r', encoding='utf-8') as f:
                 data = f.readlines()
-                with open(file_name, 'w', encoding='utf-8') as copy_one_contact:
+                with open(file_name, 'w',
+                          encoding='utf-8') as copy_one_contact:
                     for line in data:
                         copy_one_contact.write(line.replace(was, is_new))
                     copy_one_contact.close()
-                    f.close()
                     print()
                     print("Справочник успешно отредактирован")
                     print()
-        except:
-            print("Ошибка")
+        except Exception as err:
+            print("Ошибка:", err)
     if change_contact == '3':
-            with open(file_name, 'r', encoding='utf-8') as main:
-                with open('phone_book/backup_file.txt', 'w', encoding='utf-8') as copy:
-                    for i, line in enumerate(main, 1):
-                        copy.write('{}: {}'.format(i, line))
-                        print(f'{i}.', line.rstrip())
+        with open(file_name, 'r', encoding='utf-8') as main:
+            with open('phone_book/backup_file.txt', 'w',
+                      encoding='utf-8') as copy:
+                for i, line in enumerate(main, 1):
+                    copy.write('{}: {}'.format(i, line))
+                    print(f'{i}.', line.rstrip())
+                print()
+                number_contact = int(
+                    input('Введите № контакта, подлежащего изменениям: '))
+                print()
+                try:
+                    with open(file_name, 'r', encoding='utf-8') as source:
+                        content = source.read()
+                        lines = content.splitlines()
+                        lines = lines[number_contact - 1]
+                    print(
+                        f'Выбранный контакт:\n{lines}')
                     print()
-                    copy.close()
-                    main.close()
-                    number_contact = int(input('Введите № контакта, подлежащего изменениям: '))
-                    print()
-                    try:
-                        with open(file_name, 'r', encoding='utf-8') as source:
-                            content = source.read()
-                            lines = content.splitlines()
-                            lines = lines[number_contact - 1]
-                            source.close()
-                        print(f'Выбранный для внесения изменений контакт:\n{lines}')
-                        print()
-                        answer_add = input('Какой параметр добавим:\n1 - телефон\n2 - e-mail\n3 - прочее\nВвод: ')
-                        # if answer_add == '1':
-                        #     phone = input('Введите номер телефона абонента, если их несколько через запятую: ')#.split(',')
-                        #     with open(file_name, 'r', encoding='utf-8') as f:
-                        #         data = f.readlines()
-                        #         # f.write(data)
-                        #         with open(file_name, 'r', encoding='utf-8') as contact_phone_add:
-                        #             contact_phone_add.write('{}'.format(line))
-                        #             lines = lines[0].split
-                        #             text = lines[0]
-                        #             print(''.join(text[text.find('тел.:') + 6:] + ', ' + phone))
 
+                    dop = input('Введите данные для добавления: ')
+                    with open(file_name, 'r', encoding='utf-8') as f:
+                        data = f.readlines()
+                        with open(file_name, 'w', encoding='utf-8') as change_one_contact:
+                            for line in data:
+                                change_one_contact.write(line.replace(lines, lines + ', ' + dop))
+                            print(line.rstrip())
+                            print()
+                            print("Контакт успешно отредактирован")
+                            print()
+                except Exception as err:
+                    print("Ошибка:", err)
 
-                                
-                        #             contact_phone_add.close()
-                        #             f.close()
-                        #             print()
-                        #             print("Контакт успешно отредактирован")
-                        #             print()
-                        if answer_add == '3':
-                            dop = input('Введите данные для добавления: ')
-                            with open(file_name, 'r', encoding='utf-8') as f:
-                                data = f.readlines()
-                                # f.write(data)
-                                with open(file_name, 'w', encoding='utf-8') as change_one_contact:
-                                    # change_one_contact.write('{}'.format(line))
-                                    for line in data:
-                                        change_one_contact.write(line.replace(lines, lines + ', ' + dop))
-                                    print(line.rstrip())
-                                
-                                    change_one_contact.close()
-                                    f.close()
-                                    print()
-                                    print("Контакт успешно отредактирован")
-                                    print()
-                    except:
-                        print("Ошибка")
-    
     elif change_contact == 'x':
         flag_exit = True
 
-      
-#========================================================Функция для поиска в базе
+# ========================================================Функция для поиска в базе
 
 def find_by_name(file_name):
     word_check = input('Пожалуйста, введите ключевое слово для поиска: ')
     print()
     with open(file_name, 'r', encoding='utf-8') as f:
         data = f.readlines()
-        count = 0
+        found_contacts = []
         for line in data:
             if word_check in line:
-                count += 1
-        if count > 0:
-            print(f'Вот, что удалось найти в записях по введенному параметру: ' + word_check)
+                found_contacts.append(line)
+        if found_contacts:
+            print(
+                f'Вот, что удалось найти в записях по введенному параметру: ' + word_check)
+            for line in data:
+                if word_check in line.split():
+                    print(line.rstrip())
         else:
             print(word_check + ' Отсутствует в справочнике')
-        for line in data:
-            if word_check in line.split():
-                print(line.rstrip())
-        print() 
-    f.close()
-    return('Восполюзуйтесь меню\n')
-                            
-    
+        print()
 
+    return 'Воспользуйтесь меню\n'
 
-        # if word_check in data:
-        #     print('Вот, что удалось найти в записях по введенному параметру: ' + word_check)    
-        # else:
-        #     print(word_check + ' Отсутствует в справочнике')
-        # for line in data:
-        #     if word_check in line.split():
-        #         print(line.rstrip())   
-
-    
-#========================================================Функция основная
+# ========================================================Функция основная
 def main():
     file_name = 'phone_book/phonebook.txt'
     flag_exit = False
@@ -316,7 +236,7 @@ def main():
         print()
         answer = input('Введите № команды или \'x\' для выхода: ')
         if answer == '1':
-            
+
             print()
             show_all(file_name)
         elif answer == '2':
@@ -334,4 +254,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
