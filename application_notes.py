@@ -40,25 +40,35 @@ def add_note():
         print("Ошибка:", err)
 
 def edit_note():
-    try:
-        note_id_str = input("Введите id заметки для редактирования: ")
-        note_id = int(note_id_str)
-        notes = read_notes()
-        for note in notes:
-            if note["id"] == note_id:
-                title = input("Введите новый заголовок заметки: ")
-                body = input("Введите новое тело заметки: ")
-                timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-                note["title"] = title
-                note["message"] = body
-                note["timestamp"] = timestamp
-                save_notes(notes)
-                print("Заметка успешно отредактирована")
-                break
-        else:
-            print("Заметка с указанным id не найдена")
-    except ValueError:
-        print("Ошибка: Некорректный формат id заметки. Введите целое число.")
+    show_notes()
+    flag_exit = False
+    while not flag_exit:
+        # print("Если передумали что-либо менять введите \'x\'")
+        try:
+            answer = input("Введите id заметки для редактирования или \'x\' для выхода: ")
+            
+            notes = read_notes()
+
+            if answer == 'x':
+                        print('Вот и правильно! Итак всё прекрасно было')
+                        flag_exit = True
+            elif answer != 'x':
+                note_id = int(answer)
+                for note in notes:
+                    if note["id"] == note_id:
+                        title = input("Введите новый заголовок заметки: ")
+                        body = input("Введите новое тело заметки: ")
+                        timestamp = datetime.datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+                        note["title"] = title
+                        note["message"] = body
+                        note["timestamp"] = timestamp
+                        save_notes(notes)
+                        print("Заметка успешно отредактирована")
+                        break
+                else:
+                    print("Заметка с указанным id не найдена")
+        except ValueError:
+            print("Ошибка: Некорректный формат id заметки. Введите целое число.")
 
 def delete_note():
     try:
