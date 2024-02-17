@@ -1,6 +1,6 @@
 import json
-import datetime
 from datetime import datetime
+import datetime
 import os
 
 def read_notes():
@@ -108,7 +108,8 @@ def show_notes():
 def main():
     print('Давайте запишем вашу мысль')
     print()
-    while True:
+    flag_exit = False
+    while not flag_exit:
         command = input("Введите команду (add, edit, delete, filter, show, exit): ")
         if command == "add":
             add_note()
@@ -121,7 +122,7 @@ def main():
         elif command == "show":
             show_notes()
         elif command == "exit":
-            break
+            flag_exit = True
         else:
             print("Неверная команда. Попробуйте еще раз")
 
