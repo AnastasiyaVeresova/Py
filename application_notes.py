@@ -43,16 +43,13 @@ def edit_note():
     show_notes()
     flag_exit = False
     while not flag_exit:
-        # print("Если передумали что-либо менять введите \'x\'")
-        try:
-            answer = input("Введите id заметки для редактирования или \'x\' для выхода: ")
-            
+        answer = input("Введите id заметки для редактирования или exit для выхода: ")
+        try:           
             notes = read_notes()
-
-            if answer == 'x':
+            if answer == 'exit':
                         print('Вот и правильно! Итак всё прекрасно было')
                         flag_exit = True
-            elif answer != 'x':
+            elif answer != 'exit':
                 note_id = int(answer)
                 for note in notes:
                     if note["id"] == note_id:
@@ -68,7 +65,7 @@ def edit_note():
                 else:
                     print("Заметка с указанным id не найдена")
         except ValueError:
-            print("Ошибка: Некорректный формат id заметки. Введите целое число.")
+            print("Ошибка: Некорректный формат запроса.")
 
 def delete_note():
     try:
