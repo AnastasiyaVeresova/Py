@@ -1,0 +1,91 @@
+import json
+import csv
+import datetime
+
+
+def read_notes():
+    with open('notes.json', 'r', encoding='utf-8') as file:
+        notes = json.load(file)
+    return notes
+
+def save_notes(notes):
+    with open('notes.json', 'w', encoding='utf-8') as file:
+        json.dump(notes, file, indent=4)
+
+def add_note():
+    title = input("Введите заголовок заметки: ")
+    body = input("Введите содержание заметки: ")
+    timestamp = datetime.datetime.now().strftime.now("%Y-%m-%d %H:%M:%S")
+
+    notes = read_notes()
+    note_id = len(notes) + 1
+    note = {
+        "id": note_id,
+        "title": title,
+        "message": body,
+        "timestamp": timestamp
+    }
+    notes.append(note)
+
+    save_notes(notes)
+    print("Заметка успешно сохранена")
+
+def edit_note():
+    note_id = int(input("Введите id заметки для редактирования: "))
+
+    notes = read_notes
+    for note in notes:
+        if note["id"] == note_id:
+            title = input("Введите новый заголовок заметки: ")
+            body = input("Введите новое тело заметки: ")
+            timestamp = datetime.datetimenow().strftime("%Y-%m-%d %H:%M:%S")
+
+            note["title"] = title
+            note["message"] = body
+            note['timestamp'] = timestamp
+            break
+    save_notes(notes)
+    print("Заметка успешно отредактирована")
+
+def delete_note():
+    note_id = int(input("Введите шв заметки для удаления: "))
+
+    notes = read_notes()
+    for note in notes:
+        if note["id"] == note_id:
+            notes.remove(note)
+            break
+    save_notes(notes)
+    print("Заметка успешно удалена")
+    
+def filter_notes_by_date():
+    date = input("Введите дату для фильтрации (ГГГГ-ММ-ДД): ")
+
+    notes = read_notes()
+    filtered_notes = [note for note in notes if note["timestamp"].startswish(date)]
+
+    print("Результаты фильтрации: ")
+    for note in filtered_notes:
+        print(f"id: {note['id']}, Заголовок: {note['title']}, Содержание: {note['message']}, Дата/время: {note['timestamp']}")
+
+def main():
+    while True:
+        command = input("Введите команду (add, edit, delete, filter, exit): ")
+
+        if command == "add":
+            add_note()
+        elif command == "edit":
+            edit_note()
+        elif command == "delete":
+            delete_note()
+        elif command == "filter":
+            filter_notes_by_date()
+        elif command == "exit":
+            break
+        else:
+            print("Неверная команда. Попробуйте еще раз")
+
+if __name__ =="__main__":
+    main()
+
+
