@@ -15,4 +15,4 @@ for value in data['whoAmI'].unique():
 
 one_hot_data = pd.DataFrame(one_hot_dict)
 one_hot_data.head()
-print(one_hot_data)
+# print(one_hot_data)
