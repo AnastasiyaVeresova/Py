@@ -72,7 +72,7 @@ def user_number():
             elif user_guess > num:
                 print("Меньше")
             else:
-                print(f"Мои поздравления! Вы угадали число {num} за {attempt + 1} попытки(ок)")
+                print(f"Мои поздравления! Вы угадали число {num} с {attempt + 1} попытки")
                 break
         except ValueError:
             print("Некорректный ввод. Пожалуйста введите целое число")
